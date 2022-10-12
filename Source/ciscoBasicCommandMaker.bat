@@ -214,6 +214,7 @@ goto :Router
 :setEnablePasswordEncryption
 cls
 echo.
+:: This needs to be divided up into one section to set encrypted secret password and another to set minimum password length
 echo 4th Year Cisco Config Maker v0.0.1
 echo.
 echo Enter algorithim Type....
