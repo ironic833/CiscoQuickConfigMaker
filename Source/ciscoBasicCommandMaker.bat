@@ -214,7 +214,6 @@ goto :Router
 :setEnablePasswordEncryption
 cls
 echo.
-:: This needs to be divided up into one section to set encrypted secret password and another to set minimum password length
 echo 4th Year Cisco Config Maker v0.0.1
 echo.
 echo Enter algorithim Type....
@@ -227,6 +226,12 @@ echo.
 echo Enter enable password....
 echo.
 set /p enablepass=Enter enable password (password):
+echo enable algorithm-type %algotype% secret %enablepass% >> commands.txt
+cls
+goto :Router
+
+:: Seperate class for the minimum password length command
+:minimumPasswordLength
 cls
 echo.
 echo 4th Year Cisco Config Maker v0.0.1
@@ -235,7 +240,6 @@ echo Enter minimum password length....
 echo.
 set /p enablepass=Enter minimum length (length):
 cls
-echo enable algorithm-type %algotype% secret %enablepass% >> commands.txt
 echo security passwords min-length %minpasslength% >> commands.txt
 goto :Router
 

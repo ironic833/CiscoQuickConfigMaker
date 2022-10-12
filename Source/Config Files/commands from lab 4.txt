@@ -1,0 +1,64 @@
+conf t
+aaa new-model
+enable secret cisco12345
+exit
+
+enable view
+password: cisco12345
+
+conf t
+parser view admin1
+secret admin1pass
+commands ?
+commands exec include all show
+commands exec include all config terminal
+commands exec include all debug
+end
+
+enable view admin1
+password: admin1pass
+
+show parser view
+?
+show ?
+enable view
+password: cisco12345
+
+conf t
+parser view admin2
+secret admin2pass
+commands exec include all show
+end
+
+enable view admin2
+password:admin2pass
+show parser view
+?
+
+enable view
+cisco12345
+
+conf t
+parser view tech 
+secret techpassword
+commands exec include show version
+commands exec include show interfaces
+commands exec include show ip interface brief
+commands exec include show parser view
+end
+
+enable view tech
+password: techpassword
+?
+show ?
+show ip interface brief
+show ip route
+enable view
+password: cisco12345
+
+:: sets it as a enable view called SV that has superview permissions
+parser view SV superview
+secret superduper
+view tech
+view admin1
+
