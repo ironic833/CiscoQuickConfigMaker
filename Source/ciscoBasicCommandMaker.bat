@@ -32,12 +32,14 @@ echo.
 echo 1. Basic Commands (hostname, interface one, interface two)
 echo 2. OSPF Commands (OSPF process number, two neighbors)
 echo 3. OSPF Passive Interface (Passive interface name)
-echo 4. Set enable password (Encryption algorithim, Password, minimum length)
-echo 5. Line Console Commands (Console line number, Password, Timeout length)
-echo 6. Add Logging Synchronous Command (Just adds the logging synchronous command)
-echo 7. Aux line commands (Auxilary line number, Password, Timeout length)
-echo 8. Line VTY (No. of connections, password, timeout, transport type)
-echo 9. Exit to main menu
+echo 4. Set enable password (Encryption algorithim, Password)
+echo 5. Set password minimum length (minimum length)
+echo 6. Console line Commands (Console line number, Password, Timeout length)
+echo 7. Add Logging Synchronous Command (Just adds the logging synchronous command)
+echo 8. Aux line commands (Auxilary line number, Password, Timeout length)
+echo 9. Line VTY commands (No. of connections, password, timeout, transport type)
+echo 10. Activate vignere cipher encryption
+echo 11. Exit to main menu
 echo.
 set /p cmds=Enter command set number: 
 echo.
@@ -45,11 +47,13 @@ if %cmds% == 1 goto :routerBasic
 if %cmds% == 2 goto :routerOSPF
 if %cmds% == 3  goto :ospfPassiveInt
 if %cmds% == 4 goto :setEnablePasswordEncryption
-if %cmds% == 5 goto :setConsoleLineConfig
-if %cmds% == 6 goto :addSyncLogging
-if %cmds% == 7 goto :setAuxLineConfig
-if %cmds% == 8 goto :routerLineVty
-if %cmds% == 9 goto :mainMenu
+if %cmds% == 5 goto :minimumPasswordLength
+if %cmds% == 6 goto :setConsoleLineConfig
+if %cmds% == 7 goto :addSyncLogging
+if %cmds% == 8 goto :setAuxLineConfig
+if %cmds% == 9 goto :routerLineVty
+if %cmds% == 10 goto :passwordEncryption
+if %cmds% == 11 goto :mainMenu
 
 :: Enters into the menu and loop for entry of basic command information
 :routerBasic
@@ -62,6 +66,13 @@ echo.
 set /p hstnm=Enter hostname:
 :: these kinds of lines assign global variables 
 set hstnmg=%hstnm%
+cls
+echo.
+echo 4th Year Cisco Config Maker v0.0.1
+echo.
+echo Enter banner message......
+echo.
+set /p bannerMess=Enter banner message (message):
 cls
 echo.
 echo 4th Year Cisco Config Maker v0.0.1
@@ -98,6 +109,7 @@ set intg1g=%intg1%
 echo enable> commands.txt
 echo configure terminal>> commands.txt
 echo hostname %hstnm%>> commands.txt
+echo banner motd $%bannerMess%$ >> commands.txt
 echo interface %intnm1%>> commands.txt
 echo ip address %intg0%>> commands.txt
 echo no shutdown>> commands.txt
@@ -326,6 +338,17 @@ echo.
 echo show ip ssh >> commands.txt
 echo show users >> commands.txt
 echo show ip ospf neighbor >> commands.txt
+pause
+goto :Router
+
+:passwordEncryption
+cls
+echo.
+echo 4th Year Cisco Config Maker v0.0.1
+echo.
+echo Added service password encryption.....
+echo.
+echo service password-encryption >> commands.txt
 pause
 goto :Router
 

@@ -40,11 +40,11 @@ exec-timeout 5 0
 transport input telnet
 login
 
-#These commands need to be added
-
 service password-encryption
+
 banner motd $Unauthorized access strictly prohibited!$
-exit
+
+#These commands need to be added
 
 conf t
 username user01 algorithm-type scrypt secret user01pass
