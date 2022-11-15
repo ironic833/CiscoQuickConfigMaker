@@ -18,6 +18,7 @@ echo Select desired device:
 echo.
 echo 1. Router
 echo.
+
 set /p idnum=Enter device: 
 echo.
 if %idnum% == 1 goto :Router
@@ -27,9 +28,11 @@ if %idnum% == 1 goto :Router
 cls
 echo Select desired commands:
 echo.
-echo It's reccommended you do these in order and skip what you don't need
+echo It's reccommended you do these in order and skip what you don't need.
+echo Although these commands are listed in this menu in an order that will
+echo work, you must know which need to come first if using a custom order.
 echo.
-echo 1. Basic Commands (hostname, interface one, interface two)
+echo 1. Basic Commands (hostname, banner, interface one, interface two)
 echo 2. OSPF Commands (OSPF process number, two neighbors)
 echo 3. OSPF Passive Interface (Passive interface name)
 echo 4. Set enable password (Encryption algorithim, Password)
@@ -341,6 +344,7 @@ echo show ip ospf neighbor >> commands.txt
 pause
 goto :Router
 
+:: Added in the command to vignere encrypt plaintext passwords when viewed in show config
 :passwordEncryption
 cls
 echo.
